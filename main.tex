@@ -62,7 +62,7 @@ where $R$ is the radius of the ring and $n_\text{eff}$ is the effective index of
 \begin{figure}[!ht]
     \centering
     \includegraphics[width = 0.45\textwidth]{add_drop_RR.png}
-    \caption{From \cite{SIPORR}. Schematic of an add-drop ring resonator. The self-coupling ratios ($r_i$) and cross-coupling ratios ($k_i$) are such that $r_i^2+k_i^2=1$.}
+    \caption{From \cite{SIPORR}. Schematic of an add-drop ring resonator. The self-coupling ratios ($r_i$) and cross-coupling ratios ($k_i$) are such that $r_i^2+k_i^2=1$. The dimensions used in this paper are $220$ nm x $500$ nm for the waveguides, and 5 $\mu$m radius for the ring resonators.}
     \label{fig:1}
 \end{figure} 
 
@@ -83,16 +83,16 @@ with critical coupling occurring for $r_2a=r_1$, at which point the transmission
 
 \section{Simulation}
 \subsection*{Double-bus Resonators}
-In order to achieve critical coupling, we must identify the appropriate self-coupling and cross-coupling ratios, $r_i$ and $k_i$, as shown in Figure \ref{fig:1}. From equation \eqref{eq:crit}, critical coupling for the double-bus resonator occurs when $r_2a = r_1$. To simplify our analysis, we assume that the loss is negligible ($a\approx 1)$, such that the critical condition is approximately met when the cross-coupling ratios are symmetric, i.e. $|r_1| = |r_2|$ and $|k_1| = |k_2|$. We chose a target $k=0.5$, which is done primarily to make our analysis for cascaded ring resonators easier. To find the gap distance between the straight waveguide and ring that corresponds to $k=0.5$, we performed a series of 3D FDTD simulations, like the one shown in Figure \ref{fig:sim3d}.
+In order to achieve critical coupling, we must identify the appropriate self-coupling and cross-coupling ratios, $r_i$ and $k_i$, as shown in Figure \ref{fig:1}. From equation \eqref{eq:crit}, critical coupling for the double-bus resonator occurs when $r_2a = r_1$. To simplify our analysis, we assume that the loss is negligible ($a\approx 1)$, such that the critical condition is approximately met when the cross-coupling ratios are symmetric, i.e. $|r_1| = |r_2|$ and $|k_1| = |k_2|$. To establish the relationship between gap distance and coupling strength, we performed a series of 3D FDTD simulations, such as the one shown in Figure \ref{fig:sim3d}.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width = 0.4\textwidth]{gapdist.png}
-    \caption{3D FDTD simulation setup to identify gap to coupling parameter relationship. Input light is denoted with the magenta arrow. The output at the drop port is measured using a power meter, which measures the power coupling ratio $k =\dfrac{\frac{1}{2}\int_\mathcal{S}\text{real}(\vec{P})\cdot d\vec{A}}{\text{source power}}$, where $\mathcal{S}$ is the surface of a planar power monitor, $\vec{P}$ is the Poynting vector normal to $\mathcal{S}$, and $d\vec{A}$ is the surface normal element. }
+    \includegraphics[width = 0.35\textwidth]{gapdist.png}
+    \caption{3D FDTD setup to identify gap to coupling parameter relationship. Input light is denoted with the magenta arrow. The output at the drop port is measured using a power meter, which measures the power coupling ratio $k =\dfrac{\frac{1}{2}\int_\mathcal{S}\text{real}(\vec{P})\cdot d\vec{A}}{\text{source power}}$, where $\mathcal{S}$ is the surface of a planar power monitor, $\vec{P}$ is the Poynting vector normal to $\mathcal{S}$, and $d\vec{A}$ is the surface normal element. }
     \label{fig:sim3d}
 \end{figure} 
 
-The simulated waveguides have cross-section dimensions of $220$ x $500$ nm, which are the same as the fabricated waveguides. The half-ring radius is $5$ $\mu$m. We performed five simulations, with the parameter of interest being the gap distance. By varying the gap from 100 nm to 200 nm in increments of $25$ nm, we observed a $\Delta k$ of $0.36$, as shown in Table \ref{tab:sim}. 
+The simulated waveguides have cross-section dimensions of $220$ nm x $500$ nm, which are the same as the fabricated waveguides. The half-ring radius is $5$ $\mu$m. We performed five simulations, with the parameter of interest being the gap distance. By varying the gap from 100 nm to 200 nm in increments of $25$ nm, we observed a $\Delta k$ of $0.36$, as shown in Table \ref{tab:sim}. As the gap distance decreases, there is a clear trend for an increase in the coupling strength. 
 
 \begin{table}[!ht]
 \centering
@@ -109,32 +109,77 @@ The simulated waveguides have cross-section dimensions of $220$ x $500$ nm, whic
 \label{tab:sim}
 \end{table}
 
-
-
-\subsection*{Double-bus Resonator Temperature Dependence} 
-Although temperature dependence is not experimentally verified, we simulated the spectral response of the double-bus resonators under different temperatures. As shown in Figure \ref{fig:temp}, the resonant wavelengths experience a blue-shift of approximately 4.5 nm when the temperature is increased from $270$ K to $300$ K.
+In addition to establishing a relationship between gap distance and coupling strength $k$, we simulated the spectral response of the double-bus resonator's pass and drop ports. We used an eigenmode solver (Lumerical MODE) to estimate the structure's effective index and loss characteristics. In particular, we found an effective index of $2.445$, a group index of $4.062$, and a loss of $4.23$ dB/cm. We then input the parameters into an optical simulation software (Lumerical INTERCONNECT) to obtain the spectra shown in Figure \ref{fig:simfull}.
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width = 0.485\textwidth]{Temp_dependence.png}
-    \caption{Simulated transmission spectrum of a double-bus ring resonator with symmetric coupling coefficients of $k = 0.5$ with temperatures ranging from $270$ K to $330$ K in increments of $10$ K.}
+    \includegraphics[width = 0.46\textwidth]{sim_full.png}
+    \includegraphics[width = 0.46\textwidth]{sim_zoom.png}
+    \caption{\textbf{Top}: Drop and pass port spectra over the wavelength range of 1500-1600 nm. \textbf{Bottom}: Zoom-in of spectra around the resonance at 1541.56 nm.}
+    \label{fig:simfull}
+\end{figure} 
+
+The simulation results from a symmetric $k$ double-bus resonator suggest a 3 dB bandwidth of about $1.55$ nm and a free spectral range (FSR) of $18.8$ nm around $ \lambda = 1550$ nm. In addition, the simulations suggest large extinction ratios on the pass port ($>30$ dB), indicating that the device is close to critically coupled, even when loss is considered ($a\not =1$). With an attenuation parameter of 4.34 dB/cm, the simulated insertion loss to the drop port is $0.087$ dB.
+
+\subsection*{Double-bus Resonator Temperature Dependence} 
+Although not experimentally verified, we simulated the spectral response of the double-bus resonators under different temperatures. As shown in Figure \ref{fig:temp}, the resonant wavelengths experience a blue-shift of approximately 4.5 nm when the temperature is increased from $270$ K to $330$ K. As the wavelength shift over this range is larger than the 3 dB bandwidth found in the previous section, we expect that thermal switching will be possible with 5 $\mu$m radius rings for the stated temperature variation.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width = 0.47\textwidth]{Temp_dependence.png}
+    \caption{Simulated pass-port transmission spectrum with temperatures ranging from $270$ K to $330$ K in increments of $10$ K.}
     \label{fig:temp}
 \end{figure} 
 
 \subsection*{Cascaded Resonators}
 
-\section{Experiment}
+While the drop-port spectrum of the double bus resonator is Lorentzian-like, it may be useful for some applications to have a more flat-top and broadband response. To achieve this, we cascade several rings together, such that the light from the input waveguide couples to the first ring, and subsequently two more before coupling out to the drop port. 
 
-After obtaining the appropriate design parameters from simulation, we designed a layout of the test structures for fabrication, as shown in figure \ref{fig:layout}. The layout includes five double-bus ring resonators with varying gap distances. In addition, the there are two cascaded ring resonator structures, with differing gap distances between the outer rings and straight waveguides. 
+We performed simulations on a cascade of three 5-$\mu$m ORRs, with the same design parameters as used by Chen \textit{et al.} in their experiment to design a box-like filter \cite{cascaderings}. In particular, the gaps were chosen to achieve the following coupling parameters: For the waveguide to the first ring, $k_{wg_1 \to R_1} = 0.5$. From the first ring to the second ring, $k_{R_1\to R_2} = 0.09$. From the second ring to the third ring, $k_{R_2 \to R_3} = 0.05$. From the third ring to the waveguide, $k_{R_3 \to wg_2} = 0.5$. These coupling parameters approximately correspond to the gap distances of 175 nm, 115 nm, 155 nm, and 175 nm, respectively. Using the coupling parameters, loss characteristics, and effective index information from above, we simulated the cascaded structure in INTERCONNECT, with the results shown in Figure \ref{fig:sim_cascade}. 
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width = 0.485\textwidth]{layout.png}
-    \caption{Device layout submitted for fabrication at Applied Nanotools. From left to right: Loopback structures (x2) to isolate grating coupler response. Following this are five 5-$\mu$m radius rings with gap distances of 100 nm, 125 nm, 150 nm, 175 nm, and 200 nm. The final two structures are the cascaded 5-$\mu$m ring devices. The cascaded structure on the left has gaps of $115$ nm and $175$ nm, respectively, to the left and right of the middle ring, and a symmetric $175$ nm gap from the outer rings to the straight waveguides. The rightmost device is similar, but with $150$ nm gaps between the outer rings and straight waveguides.}
+    \includegraphics[width = 0.47\textwidth]{sim_cascade.png}
+    \caption{Simulated drop-port transmission spectrum of the cascaded device, zoomed in on the region around 1541.75 nm.}
+    \label{fig:sim_cascade}
+\end{figure} 
+
+Our simulation yielded a 3 dB bandwidth of $2.69$ nm on the drop port, which is approximately $73.5\%$ larger than the 3 dB bandwidth of the single ring double-bus resonator. The device's insertion loss to the drop port was $7.334$ dB. The FSR is approximately $18.4$2 nm, with an extinction ratio of $21.67$ dB around $\lambda = 1550$ nm. Although the extinction ratio experienced noticeable deterioration relative to the single ring double-bus resonator, the 3 dB bandwidth is significantly larger, indicating that the cascaded device can provide a more broadband filter response. As a result, we proceed with the parameters used in simulation for the fabrication and experiment. 
+
+
+\section{Experiment}
+
+After obtaining the appropriate design parameters from simulation, we designed a layout of the test structures for fabrication, as shown in Figure \ref{fig:layout}. The layout includes five double-bus ring resonators with varying gap distances. In addition, the there are two cascaded ring resonator structures, with differing gap distances between the outer rings and straight waveguides. 
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width = 0.45\textwidth]{layout.png}
+    \caption{Device layout submitted for fabrication at Applied Nanotools. From left to right: Loopback structures (x2) to isolate grating coupler response. Following this are five 5-$\mu$m radius rings with gap distances of 100 nm, 125 nm, 150 nm, 175 nm, and 200 nm. The final two structures are the cascaded 5-$\mu$m ring devices. The cascaded structure on the left has gaps of $115$ nm and $155$ nm, respectively, to the left and right of the middle ring, and a symmetric $175$ nm gap from the outer rings to the straight waveguides. The rightmost device is similar, but with $150$ nm gaps between the outer rings and straight waveguides.}
     \label{fig:layout}
 \end{figure} 
 
-Light is coupled in and out of the chip via vertical grating couplers (VGCs) designed for TE mode operation at $-31^\circ$ \cite{VGC}. To isolate the spectral response of the VGCs used in the experiment from the response of the test structures, we included two test devices which are simple input-output couplers connected by a strip waveguide. The response of the couplers are averaged, and fourth order polynomial is used to model the VGC response. The modeled VGC response is then subtracted from the spectral response of all test devices. 
+Light is coupled in and out of the chip via vertical grating couplers (VGCs) designed for TE mode operation at an incidence angle of $-31^\circ$ \cite{VGC}. To isolate the spectral response of the VGCs used in the experiment from the response of the test structures, we included two test devices which are simple input-output couplers connected by a strip waveguide. The response of the couplers are averaged, and fourth order polynomial is used to model the VGC response. The modeled VGC response is then subtracted from the spectral response of all test devices. 
+
+\pagebreak
+The fabricated devices exhibited variation in resonance location, likely due to manufacturing variability affecting the optical path length of the ring. The change in optical path length  consequently affects the location of the resonances, according to equation \eqref{eq:lamdares}. The location of the resonances closest to, but less than, $\lambda = 1550$ nm are shown in Table \ref{tab:lambdares}, where the ring number corresponds to the ordering of rings in the fabricated layout, counting left to right in Figure \ref{fig:layout}.
+
+\begin{table}[!ht]
+\centering
+\caption{Resonant wavelengths for fabricated devices}
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Ring Number} & \textbf{$\lambda_{res}$ {[}nm{]}} \\ \hline
+1 & $1455.21$ \\ \hline
+2 & $1544.38$ \\ \hline
+3 & $1544.47$ \\ \hline
+4 & $1544.66$ \\ \hline
+5 & $1544.70$ \\ \hline
+Average & $1544.7 \pm 0.3$ \\ \hline
+Simulation & $1541.56$ \\ \hline
+\end{tabular}
+\label{tab:lambdares}
+\end{table}
+
 
 
 \section{Conclusion}
