@@ -17,7 +17,7 @@
 \usepackage{cite}
 
 \title{\LARGE \bf
-Compact broadband filters in passive silicon photonics using cascaded optical ring resonators
+Compact filters in passive silicon photonics using optical ring resonators
 }
 
 
@@ -39,7 +39,8 @@ Compact broadband filters in passive silicon photonics using cascaded optical ri
 \begin{abstract}
 
 
-We report on experimental and simulation results pertaining to the filter response of single and cascaded optical ring resonators (ORRs) in silicon photonics (SiP). Using three-dimensional finite-different time-domain simulations, we identify appropriate design parameters for our ORR devices. Using these parameters, we design a layout for experimental verification on a fabricated device. We show that ORRs can be used to implement compact optical filters with high extinction ratios. In addition, we show that cascaded ORRs can be used to achieve a broadband transmission spectrum in SiP in the 1500-1600 nm range. Using single ORRs, we achieved a filter response of $1927381238$ with $3259$. Our cascaded ORR device achieved a filter response of $0374$ with $2352354$.
+We report on experimental and simulation results pertaining to the filter response of single and cascaded optical ring resonators (ORRs) in silicon photonics (SiP). Using three-dimensional finite-different time-domain simulations, we identify appropriate design parameters for our ORR devices. Using these parameters, we design a layout for experimental verification on a fabricated device. We show that ORRs can be used to implement compact optical notch filters and wavelength-selective switches. In addition, we show that cascaded ORRs, if appropriately designed, can be used to achieve a broadband transmission spectrum in SiP in the 1500-1600 nm range. Using single ORRs, we achieved a 3 dB bandwidth of 0.26 nm, with an FSR of 18.8 nm and an insertion loss of 2.09 dB. Our cascaded ORR device achieved three discrete 3 dB bandwidths concentrated in a 2 nm wavelength range, with an FSR of about 18 nm and an insertion loss of 3.69 dB.
+
 \end{abstract}
 
 
@@ -78,7 +79,7 @@ Under resonant conditions corresponding to $\phi = 2\pi m$, the transmission at 
     T_p^{\text{res}} = \dfrac{(r_2a-r_1)^2}{(1-r_1r_2a)^2},
     \label{eq:crit}
 \end{equation}
-with critical coupling occurring for $r_2a=r_1$, at which point the transmission to the pass port is $0$. The double-bus ring resonator can thus act as both a notch filter (at the pass port) and switch (to the drop port) at the resonant wavelength. With this theory in mind, we proceed with simulations to identify the appropriate design parameters to achieve critical coupling.
+with critical coupling occurring for $r_2a=r_1$, at which point the transmission to the pass port is $0$. The double-bus ring resonator can thus act as both a notch filter (at the pass port) and switch (to the drop port) at the resonant wavelength. With this theory in mind, we proceed with simulations to identify the appropriate design parameters to achieve desired coupling.
 
 
 \section{Simulation}
@@ -92,7 +93,7 @@ In order to achieve critical coupling, we must identify the appropriate self-cou
     \label{fig:sim3d}
 \end{figure} 
 
-The simulated waveguides have cross-section dimensions of $220$ nm x $500$ nm, which are the same as the fabricated waveguides. The half-ring radius is $5$ $\mu$m. We performed five simulations, with the parameter of interest being the gap distance. By varying the gap from 100 nm to 200 nm in increments of $25$ nm, we observed a $\Delta k$ of $0.36$, as shown in Table \ref{tab:sim}. As the gap distance decreases, there is a clear trend for an increase in the coupling strength. 
+The simulated waveguides have cross-section dimensions of $220$ nm x $500$ nm, which are the same as the fabricated waveguides. The half-ring radius is $5$ $\mu$m. We performed five simulations, with the parameter of interest being the gap distance. By varying the gap from 100 nm to 200 nm in increments of $25$ nm, we observed a $\Delta k$ of $0.3598$, as shown in Table \ref{tab:sim}. As the gap distance decreases, there is a clear trend for an increase in the coupling strength. 
 
 \begin{table}[!ht]
 \centering
@@ -153,14 +154,37 @@ After obtaining the appropriate design parameters from simulation, we designed a
 
 \begin{figure}[!ht]
     \centering
-    \includegraphics[width = 0.45\textwidth]{layout.png}
-    \caption{Device layout submitted for fabrication at Applied Nanotools. From left to right: Loopback structures (x2) to isolate grating coupler response. Following this are five 5-$\mu$m radius rings with gap distances of 100 nm, 125 nm, 150 nm, 175 nm, and 200 nm. The final two structures are the cascaded 5-$\mu$m ring devices. The cascaded structure on the left has gaps of $115$ nm and $155$ nm, respectively, to the left and right of the middle ring, and a symmetric $175$ nm gap from the outer rings to the straight waveguides. The rightmost device is similar, but with $150$ nm gaps between the outer rings and straight waveguides.}
+    \includegraphics[width = 0.475\textwidth]{layout.png}
+    \caption{Device layout submitted for fabrication at Applied Nanotools. From left to right: Loopback structures to isolate grating coupler response. Following this are five 5-$\mu$m radius rings with gap distances of 100 nm, 125 nm, 150 nm, 175 nm, and 200 nm. The final two structures are cascaded 5-$\mu$m rings. The cascaded structure on the left has gaps of $115$ nm and $155$ nm, respectively, to the left and right of the middle ring, and a symmetric $175$ nm gap from the outer rings to the straight waveguides. The rightmost device is similar, but with $150$ nm gaps between the outer rings and waveguides.}
     \label{fig:layout}
+\end{figure}
+Light is coupled in and out of the chip via vertical grating couplers (VGCs) designed for TE mode operation at an incidence angle of $-31^\circ$ \cite{VGC}. To isolate the spectral response of the VGCs used in the experiment from the response of the test structures, we included two test devices which are simple input-output couplers connected by a strip waveguide. The response of the couplers are averaged, and a fourth order polynomial is used to model the VGC response. The modeled VGC response is then subtracted from the spectral response of all test devices. The adjusted pass and drop spectra for the ring with $100$ nm gaps are shown in Figure \ref{fig:exp_full}.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width = 0.47\textwidth]{exp_full.png}
+    \caption{Drop and pass port transmission spectra for the double-bus ring resonator with $100$ nm gaps. The spectral response of the input/output VGCs has been isolated and removed from the graph. }
+    \label{fig:exp_full}
+\end{figure}
+The experimental results exhibit an FSR of $18.44$ nm around $\lambda = 1550$ nm, which corresponds to a deviation of less than 2\% from the simulated value. An extinction ratio of $>20$ dB indicates good coupling, but not quite critical. This is likely due to sidewall roughness contributing to greater losses than anticipated. In addition, manufacturing variability likely had some impact on the gap distances, which consequently impacts $k$. At the resonance of $\lambda = 1545.21$ nm, shown in Figure \ref{fig:exp_zoom}, the insertion loss to the drop port is $2.09$ dB, suggesting that the device is not critically coupled. The 3 dB bandwidth is $0.26$ nm, which is sharper than expected from simulation. This is likely due to differences in parameters between simulation and fabrication.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width = 0.475\textwidth]{exp_RR.png}
+    \caption{Zoom-in of drop and pass port transmission spectra for the double-bus ring resonator with $100$ nm gaps around the resonance at $1545.21$ nm. }
+    \label{fig:exp_zoom}
+\end{figure} 
+The cascaded devices exhibited a best-case insertion loss of $3.69$ dB. The FSR is measured at about $18$ nm, which is similar to the FSR of the single-ring double-bus resonators. Extinction ratios of around 10 dB indicate that the design is quite far from the critical coupling condition, which is likely due to the increased loss from additional rings. The cascaded resonators fail to provide a continuous 3 dB bandwidth at the drop port, instead providing three discrete 3 dB bandwidths of about $0.25$ nm each, as shown in Figure \ref{fig:casc_zoom} (bottom). However, the three resonance peaks are conjoined, and provide a continuous $1.5$ nm 25 dB bandwidth in the range of $1544.2$ nm to $1545.7$ nm.
+
+\begin{figure}[!ht]
+    \centering
+    \includegraphics[width = 0.47\textwidth]{casc_full.png}
+    \includegraphics[width = 0.47\textwidth]{cascade_zoom.png}
+    \caption{\textbf{Top}: Drop and pass port transmission spectra for the cascaded ring resonator with $150$ nm gaps between the straight waveguides and outer rings. \textbf{Bottom}: Zoom-in around the resonances in the 1544-1546 nm range. }
+    \label{fig:casc_zoom}
 \end{figure} 
 
-Light is coupled in and out of the chip via vertical grating couplers (VGCs) designed for TE mode operation at an incidence angle of $-31^\circ$ \cite{VGC}. To isolate the spectral response of the VGCs used in the experiment from the response of the test structures, we included two test devices which are simple input-output couplers connected by a strip waveguide. The response of the couplers are averaged, and fourth order polynomial is used to model the VGC response. The modeled VGC response is then subtracted from the spectral response of all test devices. 
 
-\pagebreak
 The fabricated devices exhibited variation in resonance location, likely due to manufacturing variability affecting the optical path length of the ring. The change in optical path length  consequently affects the location of the resonances, according to equation \eqref{eq:lamdares}. The location of the resonances closest to, but less than, $\lambda = 1550$ nm are shown in Table \ref{tab:lambdares}, where the ring number corresponds to the ordering of rings in the fabricated layout, counting left to right in Figure \ref{fig:layout}.
 
 \begin{table}[!ht]
@@ -180,11 +204,12 @@ Simulation & $1541.56$ \\ \hline
 \label{tab:lambdares}
 \end{table}
 
-
+As the discrepancy between the experimental and simulation results is statistically significant, it is likely that the simulation parameters do not accurately reflect the fabricated device. Future experiments can work on accurately determining the effective and group indices. In addition, manufacturing variability related to topographical parameters, such as gap distance and ring radius, can be accurately measured using microscopy tools. This will provide circuit designers with a better understanding of the true fabrication output.
 
 \section{Conclusion}
+While our designs have room for improvement, they show the tremendous flexibility of optical ring resonators as switches and notch filters. The presented discrepancies between simulation and experiment can be reduced by implementing an iterative design cycle to better match simulation parameters with fabrication outputs. When combined with active electronics capable of controlling temperature, the strong wavelength selectivity of ring resonators make them strong candidates for implementing wavelength-selective optical switches for DWDM applications. In addition, the sharp drops in transmission spectrum at resonances make ORRs ideal for sensing applications in which environmental changes induce refractive index change, as such changes can be detected as shifts in the resonant wavelength. As the field continues to evolve, optical ring resonators are likely to become increasingly important as compact components capable of executing a variety of functions. 
 
-temperature tunability
+
 
 
 
